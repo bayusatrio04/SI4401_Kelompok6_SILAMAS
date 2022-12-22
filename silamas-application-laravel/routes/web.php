@@ -43,6 +43,10 @@ Route::get('/register', [UserController::class, 'index']);
 Route::post('/register', [UserController::class, 'store']);
 
 
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
+
+Route::post('/profile', [UserController::class, 'update'])->middleware('auth');
+
 Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('/myreport', [MyReportsController::class, 'index']);

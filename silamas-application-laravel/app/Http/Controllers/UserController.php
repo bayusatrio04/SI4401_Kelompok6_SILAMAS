@@ -21,6 +21,15 @@ class UserController extends Controller
             'active' => 'register'
         ]);
     }
+    public function profile()
+    {
+        $user = User::where('id', Auth::id())->get();
+        return view('profile.profile', [
+            'title' => 'Profile',
+            'active' => 'Profile',
+            'user' => $user
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -88,11 +97,35 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
-    }
+        // // Validasi input
+        // $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:users,email,' . auth()->id(),
+        //     'password' => 'nullable|min:6',
+        // ]);
 
+        // // Ambil data input
+        // $name = $request->input('name');
+        // $email = $request->input('email');
+        // $password = $request->input('password');
+
+        // Update data user
+        // $user = User::findOrFail(Auth::id())->get();
+        // $user->name = $name;
+        // $user->email = $email;
+        // if ($password) {
+        //     $user->password = Hash::make($password);
+        // }
+        // User::update($user);
+        if ($request->password) {
+            Hash::make($request->password);
+        }
+        User::findOrFail(Auth::id())->update([ 'email' => $request['email'],'name' => $request['name'],'password' =>  Hash::make($request['password'])]);
+        // Tampilkan pesan sukses dan kembali ke halaman sebelumnya
+        return back()->with('success', 'Profile berhasil diupdate');
+    }
     /**
      * Remove the specified resource from storage.
      *

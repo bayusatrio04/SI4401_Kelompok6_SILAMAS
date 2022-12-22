@@ -27,6 +27,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('vendor/toastr/toastr.min.css') }}">
+    <script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
 </head>
 <style>
     /* Preloader */
@@ -183,7 +185,25 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        </script>
 </body>
 
 </html>

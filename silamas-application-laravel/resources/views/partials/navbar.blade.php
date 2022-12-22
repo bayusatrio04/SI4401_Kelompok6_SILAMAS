@@ -36,7 +36,7 @@
                                         <a href="/statistik" aria-label="Toggle navigation">Statistik</a>
                                     </li>
                                     @auth
-                                        
+
                                     <li class="nav-item">
                                         <a href="/myreport" aria-label="Toggle navigation">My Reports</a>
                                     </li>
@@ -55,8 +55,8 @@
                                 </a>
                                 <li class="nav-item dropdown" style="list-style:none !improtant;">
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="list-style:none !improtant;">
-                                          <li><a class="dropdown-item text-primary" href="profile.php"><i class="bi bi-gear-fill text-primary"></i> My Profile</a></li>
-                                          <li><a class="dropdown-item text-primary" href=""><i class="bi bi-journal-text text-primary"></i></i>&nbsp;My Report</a></li>
+                                          <li><a class="dropdown-item text-primary" href="/profile"><i class="bi bi-gear-fill text-primary"></i> My Profile</a></li>
+
                                           <li><hr class="dropdown-divider"></li>
                                           <li>
                                               <form action="/logout" method="post">
