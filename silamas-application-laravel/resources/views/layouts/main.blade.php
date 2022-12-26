@@ -8,19 +8,24 @@
     <title>SILAMAS | {{ $title }}</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/SILAMAS.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo/logo-silamas.png') }}" />
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
-    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+
+    <link rel="stylesheet" href="{{  asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{  asset('assets/css/LineIcons.3.0.css') }}" />
+    <link rel="stylesheet" href="{{  asset('assets/css/animate.css')       }}" />
+    <link rel="stylesheet" href="{{  asset('assets/css/tiny-slider.css')   }}" />
+    <link rel="stylesheet" href="{{  asset('assets/css/glightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{  asset('assets/css/main.css')          }}" />
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     {{-- toastr --}}
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
@@ -29,6 +34,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="{{ asset('vendor/toastr/toastr.min.css') }}">
     <script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
+
 </head>
 <style>
     /* Preloader */
@@ -156,10 +162,10 @@
             var logo = document.querySelector('.navbar-brand img')
             if (window.pageYOffset > sticky) {
             header_navbar.classList.add("sticky");
-            logo.src = 'assets/images/logo/logo.svg';
+            logo.src = 'assets/img/logo/logo.svg';
             } else {
             header_navbar.classList.remove("sticky");
-            logo.src = 'assets/images/logo/white-logo.svg';
+            logo.src = 'assets/img/logo/white-logo.svg';
             }
 
             // show or hide the back-top-top button
@@ -204,6 +210,9 @@
                 "hideMethod": "fadeOut"
             }
         </script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

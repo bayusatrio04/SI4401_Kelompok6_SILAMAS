@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\User;
-use App\Models\Pengaduan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+use File;
 class HomeController extends Controller
 {
-    public function home(){
+    public function index()
+    {
+        $user = Auth::user()->nik;
 
-        $pengaduan = Pengaduan::all();
-        return view('index', [
-            "title" => "Home",
-            "active" => 'home'
-        ])->with(compact('pengaduan'));
+        return view('pages.user.index', ['title'=>'Home','liat' => $user]);
     }
 }

@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Pengaduan extends Model
 {
-
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'image', 'status', 'user_nik', 'user_id', 'type', 'lokasi', 'tanggal_kejadian'
+        'name', 'description', 'image', 'status', 'user_nik', 'user_id', 'type', 'secret', 'lokasi', 'tanggal_kejadian'
     ];
 
     protected $hidden = [
@@ -41,6 +41,5 @@ class Pengaduan extends Model
     public function status() {
     return $this->belongsTo(Tanggapan::class, 'status_id','status');
     }
-
 
 }

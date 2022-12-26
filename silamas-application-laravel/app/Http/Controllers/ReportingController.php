@@ -9,6 +9,7 @@ use File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ReportingController extends Controller
 {
@@ -20,7 +21,7 @@ class ReportingController extends Controller
     public function index()
     {
 
-        return view('laporans.create', ['title' => 'Create Laporan']);
+        return view('pages.user.laporans.create', ['title' => 'Create Laporan']);
     }
 
     /**
@@ -62,8 +63,9 @@ class ReportingController extends Controller
         $data['image'] = $img;
         $resorce->move(\base_path() ."/public/assets/images/upload", $img);
 
+        Alert::success('Berhasil', 'Pengaduan terkirim');
         Pengaduan::create($data);
-        return redirect('/')->with('success', 'Pengaduan terkirim');
+        return redirect('/user')->with('success', 'Pengaduan terkirim');
 
 
         // if($request->hasFile('gambar')){
@@ -89,9 +91,17 @@ class ReportingController extends Controller
      */
     public function show($id)
     {
-        return view('laporans.show', compact('laporan'));
-    }
+        $item = Pengaduan::with([
+            'details', 'user'
+        ])->findOrFail($id);
 
+        $tangap = Tanggapan::where('pengaduan_id', $id)->first();
+
+        return view('pages.user.show', [
+            'item' => $item,
+            'tangap' => $tangap
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -141,3 +151,4 @@ class ReportingController extends Controller
                         ->with('success','Laporan deleted successfully.');
     }
 }
+

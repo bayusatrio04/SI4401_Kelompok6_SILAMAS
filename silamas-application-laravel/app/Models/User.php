@@ -21,10 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
-        'gender',
         'address',
+        'gender',
         'password',
-        'role'
+        'roles'
     ];
 
     /**
@@ -45,7 +45,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function reports()
+    {
+        return $this->hasMany(Pengaduan::class);
+    }
+    public function canAccessReport($reportId)
+    {
+        // Logika untuk mengecek apakah user yang sedang login memiliki hak akses ke laporan tersebut
+        return $this->reports()->where('id', $reportId)->exists();
+    }
     public function pengaduan()
     {
         return $this->hasMany(Pengaduan::class, 'user_nik', 'nik');
