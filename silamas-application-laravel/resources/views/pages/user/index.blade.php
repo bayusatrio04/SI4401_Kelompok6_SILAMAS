@@ -37,6 +37,9 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 col-md-12 col-12">
                         <div class="content">
+                            {{-- @if (session('alert'))
+                                <a href="{{ route('verifikasi.index') }}" class="nav-link badge text-bg-danger mx-5">{{ session('alert') }} klik disini</a>
+                            @endif --}}
                             <h2><span>Cari Laporan?</span>Cari Laporan Disini</h2>
                             <!-- Start Search Form -->
                             <form action="{{ route('search') }}" method="GET">

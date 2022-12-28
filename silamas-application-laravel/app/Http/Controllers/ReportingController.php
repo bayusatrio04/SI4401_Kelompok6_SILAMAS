@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class ReportingController extends Controller
 {
@@ -52,6 +53,19 @@ class ReportingController extends Controller
         $nik = Auth::user()->nik;
         $id = Auth::user()->id;
         $name = Auth::user()->name;
+        // $submit = Auth::user()->submit;
+        $user = User::find(Auth::user()->id);
+        $user->persentase = $user->persentase + 50;
+        $user->save();
+        if ($user->persentase >= 100){
+            $user->level = $user->level + 1;
+            $user->save();
+
+            DB::table('users')
+            ->where('id', $user->id)
+            ->update(['persentase' => 0]);
+        }
+
 
         $resorce       = $request->file('image');
         $img   = $resorce->getClientOriginalName();

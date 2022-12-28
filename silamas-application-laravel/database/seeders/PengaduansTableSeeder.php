@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Faker\Factory as Faker;
 class PengaduansTableSeeder extends Seeder
 {
     /**
@@ -17,8 +18,9 @@ class PengaduansTableSeeder extends Seeder
 
         public function run()
         {
+            $faker = Faker::create();
             // Insert 50 data dummy pengaduan
-            for ($i = 1; $i <= 50; $i++) {
+            for ($i = 1; $i <= 100; $i++) {
                 $user_nik = DB::table('users')->inRandomOrder()->first()->nik;
                 $user_id = DB::table('users')->where('nik', $user_nik)->first()->id;
                 $name = DB::table('users')->inRandomOrder()->first()->name;
@@ -29,6 +31,8 @@ class PengaduansTableSeeder extends Seeder
                 $tanggal_kejadian = "2022-01-0{$i}";
                 $secret = ['Tidak', 'Ya'][rand(0, 1)];
                 $status = 'Pending';
+                $created_at =  $faker->dateTimeBetween('-1 year', 'now');
+                $update_at =  $faker->dateTimeBetween('-1 year', 'now');
 
                 DB::table('pengaduans')->insert([
                     'user_nik' => $user_nik,
@@ -40,7 +44,9 @@ class PengaduansTableSeeder extends Seeder
                     'lokasi' => $lokasi,
                     'tanggal_kejadian' => $tanggal_kejadian,
                     'secret' => $secret,
-                    'status' => $status
+                    'status' => $status,
+                    'created_at'=>$created_at,
+                    'updated_at'=>$update_at
                 ]);
             }
         }

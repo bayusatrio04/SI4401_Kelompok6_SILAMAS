@@ -90,7 +90,7 @@
 						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Main Forms</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
 						<ul class="pc-submenu">
 							<li class="pc-item"><a class="pc-link" href="{{ url('admin/user') }}">Form User</a></li>
-							<li class="pc-item"><a class="pc-link" href="form2_input_group.html">Form Laporan</a></li>
+							<li class="pc-item"><a class="pc-link" href="{{ url('admin/laporan') }}">Form Laporan</a></li>
 							<li class="pc-item"><a class="pc-link" href="form2_checkbox.html">Form Tanggapan</a></li>
 							<li class="pc-item"><a class="pc-link" href="form2_radio.html">Form Petugas</a></li>
 						</ul>
@@ -223,8 +223,8 @@
                             <h5 class="m-b-10">Dashboard</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item">Dashboard</li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item">{{ $title }}</li>
                         </ul>
                     </div>
                 </div>

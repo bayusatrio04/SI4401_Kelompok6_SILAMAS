@@ -67,21 +67,79 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="card text-center">
-                            <div class="card-body">
-                                <h5 class="card-title"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"></h5>
-                                <p class="card-text fw-bold">{{ $tampil->name }}</p>
-                                <p class="card-text text-muted">{{ $tampil->nik }}</p>
-                                <span  class="badge text-bg-primary">{{ $tampil->role }}</span>
-                                @foreach($type as $tmp)
-                                    @if($tmp->secret == "Tidak")
-                                        <div>Anonim : Ya</div>
-                                    @else
-                                         <div>Anonim : Tidak</div>
-                                    @endif
-                                @endforeach
+                                <div class="card-body">
+                                    <h5 class="card-title"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"></h5>
+                                    <p class="card-text fw-bold">{{ $tampil->name }}</p>
+                                    <p class="card-text text-muted">{{ $tampil->nik }}</p>
+                                    <span  class="badge text-bg-primary">{{ $tampil->role }}</span>
+                                    @if($tampil->level >= 2)
+                                    <div class="silver">
+                                        <span class="badge rounded-pill text-bg-secondary">
+                                            Silver
+                                        </span><br>
+                                    </div>
+                                @elseif ($tampil->level >= 5)
+                                    <div class="gold">
+                                        <span class="badge text-bg-info mt-3 p-3">
+                                            Gold
+                                        </span>
+                                    </div>
+                                @elseif ($tampil->level >= 10)
+                                    <div class="diamond">
+                                        <span class="badge text-bg-info mt-3 p-3">
+                                            Diamond
+                                        </span>
+                                    </div>
+                                @elseif($tampil->level <= 2)
+                                    <div class="bronze">
+                                        <span class="badge rounded-pill text-bg-light">Bronze</span>
+                                    </div>
+                                @endif
+                                </div>
                             </div>
+                                <style>
+                                    .diamond span{
+                                        color:rgb(207, 204, 204) !important;
+                                        background-color: rgb(162, 0, 187) !important;
+                                    }
+                                    .silver span{
+                                        color:rgb(255, 255, 255) !important;
+                                        background-color: rgb(136, 136, 136) !important;
+                                    }
+                                    .bronze span{
+                                        color:rgb(255, 255, 255) !important;
+                                        background-color: rgb(100, 44, 44) !important;
+                                    }
+                                </style>
+                            <div class="col-12">
+
+                                <p class=" text-muted"> <span class="text-danger">*</span> Lapor untuk meningkatkan level anda!</p>
+                                <span class="badge rounded-pill text-bg-info text-light">level sekarang : {{ $tampil->level }}</span><br>
+                                <span class="badge rounded-pill text-bg-light">Persentase untuk naik level :
+                                    <span>
+                                        @if($tampil->persentase > 0)
+                                            {{ $tampil->persentase }}
+                                        @endif
+                                    %</span>
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="warning striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: {{ $tampil->persentase }}%"></div>
+                                </div>
+                                <div class="mt-3 bronze">
+                                    Level < 2 :  <span class="badge rounded-pill text-bg-secondary">Bronze</span>
+                                </div>
+                                <div class="mt-3 silver">
+                                    Level > 2 :  <span class="badge rounded-pill text-bg-secondary">Silver</span>
+                                </div>
+                                <div class="mt-3 gold">
+                                    Level > 5 :  <span class="badge rounded-pill text-bg-warning text-light">Gold</span>
+                                </div>
+                                <div class="mt-3 diamond">
+                                    Level > 10 :  <span class="badge rounded-pill text-bg-warning text-light">Diamond</span>
+                                </div>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="card">
                             <div class="card-body">

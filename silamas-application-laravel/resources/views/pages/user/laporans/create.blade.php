@@ -20,6 +20,15 @@
   overflow: hidden;
 }
 </style>
+    {{-- @if (!Auth::user()->email_verified_at)
+    <script>
+        function verifyUser() {
+        alert('User belum di-verify. Anda tidak dapat melakukan pengaduan laporan.');
+        window.location.href = '{{ route('verifikasi.index') }}';
+        return false;
+        }
+    </script>
+    @endif --}}
     <!-- Start Hero Area -->
     <section class="hero-area">
         <div class="container">
@@ -47,9 +56,13 @@
                         <div class="content">
                             <h2><span>Punya problem?</span>Silahkan Lapor</h2>
                             <!-- Start Search Form -->
+                            {{-- @if (Auth::user()->email_verified_at)
+                            <div class="alert alert-success">
+                                User sudah di-verify.
+                            </div>
+                            @else --}}
                             <form action="{{ route('laporans.store')}} " method="POST" enctype="multipart/form-data" class="p-3">
                                 @csrf
-
                                 <div class="form-group">
                                     <div for="">Type Laporan</div>
                                     <div class="btn-group d-flex mt-3" role="group" aria-label="Basic radio toggle button group">

@@ -13,6 +13,7 @@ class DashboardController extends Controller
 {
     public function index() {
         return view('pages.admin.dashboard',[
+            'title'=> 'Dashboard',
             'pengaduan' => Pengaduan::count(),
             'user' => User::where('roles','=', 'USER')->count(),
             'petugas' => User::where('roles', '=', 'PETUGAS')->count(),
@@ -21,16 +22,6 @@ class DashboardController extends Controller
             'pending' => Pengaduan::where('status', 'Pending')->count(),
             'process' => Pengaduan::where('status', 'Processing')->count(),
             'complete' => Pengaduan::where('status', 'Complete')->count(),
-        ]);
-    }
-    public function user()
-    {
-
-        $data = DB::table('users')->where('roles', '=', 'USER')->get();
-
-        return view('pages.admin.forms.user', [
-            'data' => $data,
-            'title'=>"User Control"
         ]);
     }
     public function logout(Request $request)

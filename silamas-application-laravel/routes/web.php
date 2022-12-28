@@ -74,7 +74,11 @@ Route::prefix('admin')
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::post('logout', 'DashboardController@logout')->name('logout');
-        Route::get('user', 'DashboardController@user')->name('user');
+        Route::get('user', 'DashboardAdminController@index')->name('index');
+        Route::get('user/{id}','DashboardAdminController@show')->name('detail.user');
+        Route::get('laporan', 'DashboardAdminController@laporan')->name('laporan');
+        Route::get('laporan/{id}','DashboardAdminController@detail_laporan')->name('detail.laporan');
+        Route::post('laporan','DashboardAdminController@store')->name('detail.store');
 });
 
 
@@ -90,6 +94,8 @@ Route::prefix('user')
                 Route::post('profile', [DashboardUserController::class, 'update'])->middleware('auth')->name('profile');
                 Route::get('detail/{id}','DashboardUserController@show')->name('detail')->middleware('check.report.access');
                 Route::get('error','DashboardUserController@error')->name('error');
+                Route::get('/verifikasi', 'VerifikasiController@index')->name('verifikasi.index');
+                Route::post('/verifikasi', 'VerifikasiController@store')->name('verifikasi.store');
 });
 
 

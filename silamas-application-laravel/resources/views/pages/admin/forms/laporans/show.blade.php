@@ -2,11 +2,17 @@
 
 @section('section-main')
 <div class="row">
+    @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Berhasil</strong> Laporan berhasil dilakukan.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <!-- customer-section start -->
     <div class="col-xl-12 col-md-6">
         <div class="card table-card">
             <div class="card-header">
-                <h5>List user</h5>
+                <h5>List Laporan</h5>
             </div>
             <div class="pro-scroll" style="height:300px;position:relative;">
                 <div class="card-body p-0">
@@ -14,29 +20,35 @@
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>nik</th>
-                                    <th>phone</th>
-                                    <th>email</th>
+                                    <th>user-nik</th>
+                                    <th>name</th>
+                                    <th>type</th>
+                                    <th>status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($data as $user)
+                                @forelse ($pengaduan as $user)
                                 <tr class="text-gray-700 dark:text-gray-400">
+                                  <td class="px-4 py-3 text-sm">
+                                    {{ $user->user_nik }}
+                                  </td>
                                   <td class="px-4 py-3 text-sm">
                                     {{ $user->name }}
                                   </td>
                                   <td class="px-4 py-3 text-sm">
-                                    {{ $user->nik }}
+                                    {{ $user->type }}
                                   </td>
                                   <td class="px-4 py-3 text-sm">
-                                    {{ $user->phone }}
+                                    @if($user->status == "Pending")
+                                    <div><label class="badge bg-light-danger">{{ $user->status }}</label></div>
+                                    @elseif($user->status == "Processing")
+                                    <div><label class="badge bg-light-warning">{{ $user->status }}</label></div>
+                                    @elseif($user->status == "Complete")
+                                    <div><label class="badge bg-light-success">{{ $user->status }}</label></div>
+                                    @endif
                                   </td>
-                                  <td class="px-4 py-3 text-sm">
-                                    {{ $user->email }}
-                                  </td>
-                                  <td><a href="{{ route('detail.user',$user->id) }}"><i class="icon feather icon-edit f-16  text-success"></i></a></td>
+                                  <td><a href="{{ route('detail.laporan',$user->id) }}"><i class="icon feather icon-edit f-16  text-success"></i></a></td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -53,26 +65,6 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-12 col-md-6">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card prod-p-card background-pattern">
-                    <div class="card-body">
-                        <div class="row align-items-center m-b-0">
-                            <div class="col">
-                                <h6 class="m-b-5">Total User</h6>
-                                <h3 class="m-b-0">{{ $totaluser }}</h3>
-                            </div>
-                            <div class="col-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill text-info" viewBox="0 0 16 16">
-                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                                  </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card feed-card">
             <div class="card-header">
                 <h5>History</h5>

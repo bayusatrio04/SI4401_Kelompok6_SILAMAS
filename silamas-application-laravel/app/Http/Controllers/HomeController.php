@@ -13,8 +13,14 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $email = Auth::user()->email;
+        if (!Auth::user()->email_verified_at) {
+            session()->flash('alert', 'email '.$email.'  belum di-verification');
+        }
         $user = Auth::user()->nik;
 
         return view('pages.user.index', ['title'=>'Home','liat' => $user]);
     }
+
+
 }
