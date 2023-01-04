@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="">
-                                        <span class="">Lokasi</span>
+                                        <span class="">Lokasi (jika tipe laporan 'Lainnya' kosongkan saja atau isi dengan '-')</span>
                                         <textarea
                                         class="form-control"
                                         rows="4" cols="100" type="text" placeholder="Kejadian laporan nya dimana jelasin" value="{{ old('lokasi')}}" required

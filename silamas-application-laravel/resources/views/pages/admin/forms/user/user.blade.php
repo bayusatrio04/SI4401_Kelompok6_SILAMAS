@@ -2,6 +2,14 @@
 
 @section('section-main')
 <div class="row">
+    <label for="search">Search user</label>
+    <form action="{{ route('search.user') }}" method="post">
+        @csrf
+        <div class="form-group">
+            <input type="text" class="form-control" name="search">
+            <button type="submit" class="btn btn-primary mt-3"> Cari user</button>
+        </div>
+    </form>
     <!-- customer-section start -->
     <div class="col-xl-12 col-md-6">
         <div class="card table-card">

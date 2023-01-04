@@ -15,10 +15,13 @@ class CreateTanggapansTable extends Migration
     {
         Schema::create('tanggapans', function (Blueprint $table) {
             $table->id();
-            $table->integer('pengaduan_id');
-            $table->text('tanggapan');
+            $table->integer('pengaduan_id')->onDelete('cascade');
+            $table->text('tanggapan')->default('Tunggu Konfirmasi');
             $table->integer('petugas_id');
+            $table->integer('user_id');
+            $table->text('feedback_user')->nullable();
             $table->timestamps();
+
         });
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 
 class DashboardUserController extends Controller
@@ -19,6 +20,7 @@ class DashboardUserController extends Controller
      */
     public function index(){
         $user = Auth::id();
+        $tangap = Tanggapan::where('user_id', Auth::user()->id)->firstOrNew();
         $pengaduan = Pengaduan::where('user_id', Auth::id())->get();
         return view('pages.user.dashboard.index',
         ['title'=>'Dashboard',
@@ -26,7 +28,8 @@ class DashboardUserController extends Controller
         'pending' => Pengaduan::where('user_id', Auth::id())->where('status', 'Pending')->count(),
         'process' => Pengaduan::where('user_id', Auth::id())->where('status', 'Processing')->count(),
         'completed' => Pengaduan::where('user_id', Auth::id())->where('status', 'Complete')->count(),
-        'tanggapan' => Tanggapan::where('pengaduan_id', Auth::id())->where('tanggapan', true)->count(),
+        'tanggapan' => Tanggapan::where('id')->count(),
+        'tangap' => $tangap,
         ],['user'=>$user])->with(compact('pengaduan'));
 
     }
@@ -39,6 +42,10 @@ class DashboardUserController extends Controller
             'user' => $user,
             'type' => $type
         ]);
+    }
+    public function leaderboard(){
+        $levels = User::where('roles', 'USER')->orderBy('level', 'desc')->limit(10)->get();
+        return view('pages.user.leaderboard', ['title'=>'Leaderboard User Level'], compact('levels'));
     }
     /**
      * Show the form for creating a new resource.
@@ -58,7 +65,10 @@ class DashboardUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('tanggapans')->where('pengaduan_id', $request->pengaduan_id)->where('id', $request->id)->update([
+            'feedback_user'=> $request->feedback,
+        ]);
+        return back()->with('success', 'Feedbacks berhasil dikirim');
     }
 
     /**
@@ -67,14 +77,17 @@ class DashboardUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        
         $detail = Pengaduan::with([
             'details', 'user'
         ])->findOrFail($id);
-
-        $tangap = Tanggapan::where('pengaduan_id', $id)->first();
-
+        $id_tanggapan = Tanggapan::get();
+        $id_t = $id_tanggapan->pluck('id', $id);
+        // ->orWhere('id', $id_t)
+        // dd($id_t);
+        $tangap = Tanggapan::where('pengaduan_id', $id)->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->firstOrNew();
         return view('pages.user.dashboard.detail', [
             'item' => $detail,
             'tangap' => $tangap,

@@ -52,7 +52,7 @@
                         <h1 class="wow fadeInUp" data-wow-delay=".4s">
                             Dashboards
                         </h1>
-                        <div class="container">
+                        <div class="container mt-5">
                             <div class="col-12 col-9">
                                 <div class="row">
                                 <div class="col-6 col-lg-3 col-md-6">
@@ -139,29 +139,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <center>
-                                    <div class="col-6 col-lg-3 col-md-6">
-                                        <div class="card">
-                                            <div class="card-body px-4 py-4-5">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                        <div class="stats-icon blue mb-2">
-                                                            <i> <i class="bi bi-chat-square-text-fill"></i></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                        <h6 class="text-muted font-semibold">Feedbacks</h6>
-                                                        @if($tanggapan > 0)
-                                                        <h6 class="font-extrabold mb-0">{{ $tanggapan }}</h6>
-                                                        @else
-                                                        <h6 class="text-secondary mb-0">Kosong</h6>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </center>
                             </div>
                         </div>
                     </div>
@@ -182,15 +159,29 @@
                             @foreach ($pengaduan as $aduan)
                             <div class="card text-bg-dark">
                                 <div class="card-header text-white d-flex">
-                                  Laporan&nbsp;<span class="card-title text-danger">#{{ $aduan->id }}</span> <a href="{{ route('detail',$aduan->id) }}" class="ms-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                  </svg></a>
+                                  Laporan&nbsp;<span class="card-title text-danger">#{{ $aduan->id }}</span> 
+                                    <div class="d-flex justify-content-end">
+                                        <form action="{{ route('detail',$aduan->id) }}" method="get">
+                                            <input type="hidden" name="id" value="{{ $tangap->id }}">
+                                            <button type="submit" class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                  <p class="card-text text-muted">Type : <span class="badge text-bg-info"> {{ $aduan->type }}</p> </span>
+                                  <p class="card-text text-muted">Type : <span class="badge rounded-pill text-bg-info"> {{ $aduan->type }}</p> </span>
                                   <span>Description : {{ $aduan->description }}</span>
-                                  <p class="card-text text-muted">Status : <span class="badge text-bg-danger"> {{ $aduan->status }}</p> </span>
+                                  <p class="card-text text-muted">Status : 
+                                    @if ($aduan->status == "Pending")
+                                    <h1 class=" badge text-bg-danger fw-bold">{{ $aduan->status }}</h1>
+                                    @elseif ($aduan->status == "Processing")
+                                    <h1 class="badge text-bg-warning">{{ $aduan->status }}</h1>
+                                    @elseif ($aduan->status == "Complete")
+                                    <h1 class="badge text-bg-success">{{ $aduan->status }}</h1>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card text-bg-light mt-2">

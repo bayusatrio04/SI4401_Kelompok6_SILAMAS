@@ -74,11 +74,25 @@ Route::prefix('admin')
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::post('logout', 'DashboardController@logout')->name('logout');
+
+        //User Detail
         Route::get('user', 'DashboardAdminController@index')->name('index');
+        Route::post('user', 'DashboardAdminController@search')->name('search.user');
         Route::get('user/{id}','DashboardAdminController@show')->name('detail.user');
+
+        // Laporan Detail
         Route::get('laporan', 'DashboardAdminController@laporan')->name('laporan');
         Route::get('laporan/{id}','DashboardAdminController@detail_laporan')->name('detail.laporan');
         Route::post('laporan','DashboardAdminController@store')->name('detail.store');
+
+        Route::post('laporan/{id}','DashboardAdminController@destroy')->name('destroy.laporan');
+
+        // Search laporan
+        Route::get('search', 'SearchAdminController@index')->name('index');
+        Route::post('search', 'SearchAdminController@search')->name('search.laporan');
+
+        //Tanggapan Laporan User
+        Route::get('tanggapan', 'DashboardAdminController@tanggapan')->name('tanggapan.user');
 });
 
 
@@ -86,16 +100,26 @@ Route::prefix('admin')
 Route::prefix('user')
     ->middleware(['auth', 'MasyarakatMiddleware'])
     ->group(function() {
+                //Home
 				Route::get('/', 'HomeController@index')->name('user-dashboard');
+                //Create Laporan
                 Route::resource('laporans', 'ReportingController')->middleware('auth');
+                //Search Home
                 Route::get('search', [SearchController::class, 'search'])->name('search');
+                //Dasboard User Laporan
                 Route::get('dashboard', [DashboardUserController::class, 'index'])->middleware('auth')->name('dashboard');
+                //Profle user
                 Route::get('profile', [DashboardUserController::class, 'profile'])->middleware('auth')->name('profile');
                 Route::post('profile', [DashboardUserController::class, 'update'])->middleware('auth')->name('profile');
+                //Detail Laporan
                 Route::get('detail/{id}','DashboardUserController@show')->name('detail')->middleware('check.report.access');
                 Route::get('error','DashboardUserController@error')->name('error');
-                Route::get('/verifikasi', 'VerifikasiController@index')->name('verifikasi.index');
-                Route::post('/verifikasi', 'VerifikasiController@store')->name('verifikasi.store');
+                //LeaderBoard
+                Route::get('leaderboard','DashboardUserController@leaderboard')->name('leaderboard');
+                //Feedback jika complete
+                Route::post('feedback','DashboardUserController@store')->name('feedback.complete');
+
+
 });
 
 

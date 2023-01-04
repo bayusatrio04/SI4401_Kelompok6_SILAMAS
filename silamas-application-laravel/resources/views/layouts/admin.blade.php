@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin | SILAMAS</title>
+    <title>Admin | {{ $title }}</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -28,6 +28,8 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
+    {{-- Chart Js --}}
+
 
 </head>
 
@@ -83,25 +85,18 @@
 					<li class="pc-item pc-caption">
 						<label>Forms</label>
 					</li>
-                    <li class="pc-item">
-						<a href="/search" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Serach</span></a>
-					</li>
 					<li class="pc-item pc-hasmenu">
-						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Main Forms</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Main Forms</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
 						<ul class="pc-submenu">
-							<li class="pc-item"><a class="pc-link" href="{{ url('admin/user') }}">Form User</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ url('admin/user') }}">Form User</a></li>
 							<li class="pc-item"><a class="pc-link" href="{{ url('admin/laporan') }}">Form Laporan</a></li>
-							<li class="pc-item"><a class="pc-link" href="form2_checkbox.html">Form Tanggapan</a></li>
+							<li class="pc-item"><a class="pc-link" href="{{ url('admin/tanggapan') }}">Form Tanggapan</a></li>
 							<li class="pc-item"><a class="pc-link" href="form2_radio.html">Form Petugas</a></li>
 						</ul>
-					</li>
-					<li class="pc-item pc-hasmenu">
-						<a href="#!" class="pc-link"><span class="pc-micon"><i class="material-icons-two-tone">https</i></span><span class="pc-mtext">Authentication</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-						<ul class="pc-submenu">
-							<li class="pc-item"><a class="pc-link" href="auth-signup.html" target="_blank">Sign up</a></li>
-							<li class="pc-item"><a class="pc-link" href="auth-signin.html" target="_blank">Sign in</a></li>
-						</ul>
-					</li>
+					</li><hr>
+                    <li class="pc-item">
+                        <a href="{{ route('index') }}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">search</i></span><span class="pc-mtext">Search</span></a>
+                    </li>
 
 				</ul>
 			</div>
@@ -244,11 +239,16 @@
 
 <!-- Apex Chart -->
 <script src=" {{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
-<script>
-</script>
+<script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/chart-apex.js') }}"></script>
 
 <!-- custom-chart js -->
 <script src=" {{ asset('assets/js/pages/dashboard-sale.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src=" {{ asset('assets/js/chart.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+
 </body>
 
 </html>

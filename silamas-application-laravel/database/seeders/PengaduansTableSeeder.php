@@ -23,8 +23,8 @@ class PengaduansTableSeeder extends Seeder
             for ($i = 1; $i <= 100; $i++) {
                 $user_nik = DB::table('users')->inRandomOrder()->first()->nik;
                 $user_id = DB::table('users')->where('nik', $user_nik)->first()->id;
-                $name = DB::table('users')->inRandomOrder()->first()->name;
-                $type = ['Penduan', 'Aspirasi', 'Lainnya'][rand(0, 2)];
+                $name = DB::table('users')->inRandomOrder()->where('nik', $user_nik)->first()->name;
+                $type = ['Pengaduan', 'Aspirasi', 'Lainnya'][rand(0, 2)];
                 $description = "Deskripsi pengaduan {$i}";
                 $image = "image_{$i}.jpg";
                 $lokasi = "Lokasi pengaduan {$i}";

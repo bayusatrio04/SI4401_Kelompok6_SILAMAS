@@ -10,16 +10,20 @@ class Tanggapan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'pengaduan_id', 'tanggapan', 'petugas_id',
+        'id', 'pengaduan_id', 'tanggapan', 'petugas_id', 'feedback_user', 'user_id'
     ];
 
     protected $hidden = [
-    
+
     ];
 
     public function pengaduan()
     {
     	return $this->hasOne(Pengaduan::class,'id', 'id');
+    }
+    public function pengaduans()
+    {
+        return $this->belongsTo(Pengaduan::class);
     }
 
     public function proses()

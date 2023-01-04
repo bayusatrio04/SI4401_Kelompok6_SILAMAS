@@ -20,6 +20,7 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
+
         $data = DB::table('users')->where('roles', '=', 'USER')->get();
 
         return view('pages.admin.forms.user.user', [
@@ -32,19 +33,40 @@ class DashboardAdminController extends Controller
             'process' => Pengaduan::where('status', 'Processing')->count()
         ]);
     }
+    public function search(Request $request)
+    {
+        $keyword = $request->input('search');
+        $data = User::where('name', 'like', "%$keyword%")
+            ->orWhere('nik', 'like', "%$keyword%")
+            ->orWhere('id', 'like', "%$keyword%")
+            ->orWhere('email', 'like', "%$keyword%")
+            ->get();
+
+        return view('pages.admin.forms.user.user', [
+            'title'=>'User Control',
+            'complete' => Pengaduan::where('status', 'Complete')->count(),
+            'totaluser' => User::where('roles','=', 'USER')->count(),
+            'tanggapan' => Tanggapan::count(),
+            'pending' => Pengaduan::where('status', 'Pending')->count(),
+            'process' => Pengaduan::where('status', 'Processing')->count()
+            ])->with(compact('data'));
+    }
 
     public function laporan()
     {
 
         $pengaduan = Pengaduan::orderBy('created_at', 'DESC')->get();
+        $pengaduan_processing = Pengaduan::where('status', 'Processing')->get();
 
         return view('pages.admin.forms.laporans.show', [
             'title'=>'Laporan Control',
             'tanggapan' => Tanggapan::count(),
             'pending' => Pengaduan::where('status', 'Pending')->count(),
             'process' => Pengaduan::where('status', 'Processing')->count(),
-            'complete' => Pengaduan::where('status', 'Complete')->count()
+            'complete' => Pengaduan::where('status', 'Complete')->count(),
+            'pros'=> Pengaduan::where('status', 'Processing')->get()
             ])->with(compact('pengaduan'));
+
     }
     public function detail_laporan($id)
     {
@@ -69,6 +91,18 @@ class DashboardAdminController extends Controller
     {
         //
     }
+    public function tanggapan() {
+        $user = auth()->user();
+        $id = $user->id;
+        // dd($id);
+        return view('pages.admin.forms.tanggapan.tanggapan',[
+            'title'=> 'Tanggapan',
+            'results_p' => Tanggapan::where('feedback_user', 'Puas')->orWhere('feedback_user', 'Tidak Puas')->orWhere('feedback_user', 'Sangat Puas')->get(),
+            'sp' => Tanggapan::where('feedback_user', 'Sangat Puas')->count(),
+            'p' => Tanggapan::where('feedback_user', 'Puas')->count(),
+            'tp' => Tanggapan::where('feedback_user', 'Tidak Puas')->count(),
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -76,28 +110,27 @@ class DashboardAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Pengaduan $complaint)
     {
+        // Validate input
+        $inputan = $request->validate([
+            'tanggapan' => 'required|string',
+        ]);
+
+        //Create response
+        $tanggapan = Tanggapan::updateOrCreate([
+            'pengaduan_id' => $request->pengaduan_id,
+            'tanggapan' => $request->input('tanggapan'),
+            'petugas_id' => Auth::id(),
+            'user_id' => $request->user_id,
+        ]);
+
+        // Update complaint status
         DB::table('pengaduans')->where('id', $request->pengaduan_id)->update([
             'status'=> $request->status,
         ]);
 
 
-        $petugas_id = Auth::user()->id;
-
-
-        $data = $request->all();
-
-        $data['pengaduan_id'] = $request->pengaduan_id;
-        $data['petugas_id']=$petugas_id;
-
-        if(Tanggapan::all() == True){
-            DB::table('tanggapans')->where('petugas_id', $request->pengaduan_id)->update([
-                'tanggapan'=> $request->tanggapan
-            ]);
-        }else{
-            Tanggapan::create($data);
-        }
         return redirect('admin/laporan')->with('success','Berhasil Menanggapi');
     }
 
@@ -148,9 +181,11 @@ class DashboardAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-
+        DB::table('tanggapans')->where('pengaduan_id', $id)->delete();
+        Pengaduan::findOrFail($id)->delete();
+        return redirect('admin/laporan')->with('delete', 'Pengaduan telah di hapus');
     }
     public function logout(Request $request)
     {

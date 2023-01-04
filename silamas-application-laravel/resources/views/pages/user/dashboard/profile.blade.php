@@ -72,19 +72,17 @@
                                     <p class="card-text fw-bold">{{ $tampil->name }}</p>
                                     <p class="card-text text-muted">{{ $tampil->nik }}</p>
                                     <span  class="badge text-bg-primary">{{ $tampil->role }}</span>
-                                    @if($tampil->level >= 2)
+                                    @if($tampil->level >= 2 && $tampil->level < 5)
                                     <div class="silver">
                                         <span class="badge rounded-pill text-bg-secondary">
                                             Silver
                                         </span><br>
                                     </div>
-                                @elseif ($tampil->level >= 5)
+                                @elseif ($tampil->level > 5 && $tampil->level < 10)
                                     <div class="gold">
-                                        <span class="badge text-bg-info mt-3 p-3">
-                                            Gold
-                                        </span>
+                                        <span class="badge rounded-pill text-bg-warning text-light">Gold</span>
                                     </div>
-                                @elseif ($tampil->level >= 10)
+                                @elseif ($tampil->level > 10)
                                     <div class="diamond">
                                         <span class="badge text-bg-info mt-3 p-3">
                                             Diamond

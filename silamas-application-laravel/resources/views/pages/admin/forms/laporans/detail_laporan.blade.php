@@ -12,7 +12,15 @@
                 <div class="card-body p-5">
                     <div class="mb-3 row">
                         <div class="col-4">
-                            <label class="badge bg-light-danger">{{ $item->status }}</label>
+                            <td class="px-4 py-3 text-sm">
+                                @if($item->status == "Pending")
+                                <div><label class="badge bg-light-danger">{{ $item->status }}</label></div>
+                                @elseif($item->status == "Processing")
+                                <div><label class="badge bg-light-warning">{{ $item->status }}</label></div>
+                                @elseif($item->status == "Complete")
+                                <div><label class="badge bg-light-success">{{ $item->status }}</label></div>
+                                @endif
+                            </td>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -69,9 +77,12 @@
                 </div>
             </div>
         </div>
+        @if($item->status == "Pending" || $item->status == "Processing")
             <form action="{{ route('detail.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="pengaduan_id" value="{{ $item->id }} ">
+                <input type="hidden" name="user_id" value="{{ $item->user_id }} ">
+
                 <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <label class=" text-sm">
                     <span class="text-gray-700 dark:text-gray-400">Tanggapan</span>
@@ -86,10 +97,17 @@
                     <select
                     class=" text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                     name="status" required>
+                    @if($item->status == "Pending")
+                    {{-- <option value="Pending">Pending</option> --}}
+                    <option value="Processing">Processing</option>
+                    @elseif($item->status == "Processing")
+                    <option value="Pending">Pending</option>
+                    <option value="Complete">Complete</option>
+                    @else
                     <option value="Pending">Pending</option>
                     <option value="Processing">Processing</option>
                     <option value="Complete">Complete</option>
-
+                    @endif
                     </select>
                 </label>
                 <br>
@@ -100,7 +118,10 @@
                 </button>
                 </div>
             </form>
-        <div class="card feed-card">
+        @else
+        <p>Laporan ini sudah <span class="text-success">Complete</span></p>
+        @endif
+        <div class="card feed-card mt-5">
             <div class="card-header">
                 <h5>History</h5>
             </div>

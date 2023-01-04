@@ -82,8 +82,8 @@
                                   <div class="p-3 mb-4 bg-light rounded-3 shadow">
                                     <div class="container-fluid py-5">
                                       <h1 class="display-5 fw-bold"># {{ $aduan->id }}</h1>
-                                      <p class="col-md-8 fs-4 d-flex ">{{ auth()->user()->name }} <span class="">Test</span></p>
-                                      <span class="badge text-bg-danger">{{ $aduan->user_nik }}</span>
+                                      <p class="col-md-8 fs-4 d-flex ">{{ auth()->user()->name }} <span class=""></span></p>
+                                      <span class="badge text-bg-success">{{ $aduan->user_nik }}</span>
                                     </div>
                                   </div>
 
@@ -92,7 +92,6 @@
                                       <div class="h-100 p-5 text-bg-dark rounded-3 shadow">
                                         <h2 class="text-info opacity-50">Deskripsi</h2>
                                         <p>{{ $aduan->description }}</p>
-                                        <button class="btn btn-outline-light" type="button">Example button</button>
                                       </div>
                                     </div>
                                     <div class="col-md-6">
@@ -101,8 +100,17 @@
                                         @php
                                             $data =  'assets/images/upload/'.$aduan->image ;
                                         @endphp
+                                        <style>
+                                            .img-hov:hover{
+                                                scale: 350% !important;
+                                                margin-left: 250px !important;
+                                            }
+
+                                        </style>
                                         @if ($aduan->image == True)
-                                        <img src="{{ asset($data) }}" width="30%" alt="">
+                                        <div class="img-hov">
+                                            <img src="{{ asset($data) }}" width="30%" alt="">
+                                        </div>
                                         @else
                                             <p class="text-danger bg-outline-danger">Tidak ada lampiran...</p>
                                         @endif
@@ -122,12 +130,12 @@
                                   </div>
 
                                   <footer class="pt-3 mt-4 text-muted border-top">
-                                    Created at <span class="badge text-bg-warning">{{ $aduan->created_at }} </span>
+                                    Created at <span class="badge text-bg-info">{{ $aduan->created_at }} </span>
                                   </footer>
                                 </div>
                                 <div class="px-4 py-3 mb-2 flex bg-white rounded-lg shadow-md dark:text-gray-400   dark:bg-gray-800">
                                     <div class="text-center flex-1">
-                                      <h1 class="mb-8 font-semibold">Tanggapan</h1>
+                                      <h3 class="mb-8 font-semibold">Tanggapan</h3>
                                       <p class="text-gray-800 dark:text-gray-400">
 
                                         @if (empty($tangap->tanggapan))
@@ -137,7 +145,44 @@
                                         @endif
                                       </p>
                                     </div>
-                                  </div>
+                                </div>
+                                <center>
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Berhasil</strong> Feedback berhasil di kirimkan.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <div class="p-3 mb-4 bg-light rounded-3 mt-3 shadow">
+                                    <div class="container py-2">
+                                        @if ($aduan->status == "Complete")
+                                        <div class="alert alert-info" role="alert">
+                                           Puas dengan layanan kami?
+                                        </div>
+                                        @if($tangap->feedback_user)
+                                        <p>Feedback saya: {{ $tangap->feedback_user }}</p>
+                                        @else
+                                        <form action="{{ route('feedback.complete') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="pengaduan_id" value="{{ $aduan->id }}">
+                                            <input type="hidden" name="id" value="{{ $tangap->id }}">
+                                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                                <input type="radio" class="btn-check" value="Sangat Puas" name="feedback" id="btnradio1" checked>
+                                                <label class="btn btn-outline-primary" for="btnradio1">Sangat Puas</label>
+                                            
+                                                <input type="radio" class="btn-check" value="Puas"  name="feedback" id="btnradio2">
+                                                <label class="btn btn-outline-primary" for="btnradio2">Puas</label>
+                                            
+                                                <input type="radio" class="btn-check" value="Tidak Puas" name="feedback" id="btnradio3">
+                                                <label class="btn btn-outline-primary" for="btnradio3">Tidak Puas</label>
+                                            </div><br>
+                                            <button type="submit" class="btn btn-primary mt-5">Kirim</button>
+                                        </form>
+                                        @endif
+                                    </center>
+                                        @endif
+                                    </div>
+                                </div>
                               </main>
                             @endforeach
                     </div>
