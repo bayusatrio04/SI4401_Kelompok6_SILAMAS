@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{  asset('assets/css/tiny-slider.css')   }}" />
     <link rel="stylesheet" href="{{  asset('assets/css/glightbox.min.css') }}" />
     <link rel="stylesheet" href="{{  asset('assets/css/main.css')          }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.0.0-alpha-2.min.css') }}"/>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -114,7 +115,9 @@
 
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">
-        <i class="lni lni-arrow-up-circle"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+          </svg>
     </a>
 
     <!-- ========================= JS here ========================= -->

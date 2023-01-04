@@ -187,6 +187,11 @@ class DashboardAdminController extends Controller
         Pengaduan::findOrFail($id)->delete();
         return redirect('admin/laporan')->with('delete', 'Pengaduan telah di hapus');
     }
+    public function delete($id)
+    {
+        DB::table('users')->where('id', $id)->delete();
+        return redirect('admin/user')->with('delete', 'User telah di hapus');
+    }
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();

@@ -85,7 +85,9 @@ Route::prefix('admin')
         Route::get('laporan/{id}','DashboardAdminController@detail_laporan')->name('detail.laporan');
         Route::post('laporan','DashboardAdminController@store')->name('detail.store');
 
+        //delete
         Route::post('laporan/{id}','DashboardAdminController@destroy')->name('destroy.laporan');
+        Route::post('user/{id}','DashboardAdminController@delete')->name('delete.user');
 
         // Search laporan
         Route::get('search', 'SearchAdminController@index')->name('index');

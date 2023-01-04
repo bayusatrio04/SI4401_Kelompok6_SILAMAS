@@ -52,95 +52,6 @@
                         <h1 class="wow fadeInUp" data-wow-delay=".4s">
                             Dashboards
                         </h1>
-                        <div class="container mt-5">
-                            <div class="col-12 col-9">
-                                <div class="row">
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon purple mb-2">
-                                                        <i class="iconly-boldShow"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Laporan anda</h6>
-                                                    @if($total > 0)
-                                                    <h6 class="font-extrabold mb-0">{{ $total }}</h6>
-                                                    @else
-                                                    <h6 class="text-secondary mb-0">Kosong</h6>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon red mb-2">
-                                                        <i class=""><i class="bi bi-patch-exclamation-fill"></i></i></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Pending</h6>
-                                                    @if($pending > 0)
-                                                    <h6 class="font-extrabold mb-0">{{ $pending }}</h6>
-                                                    @else
-                                                    <h6 class="text-secondary mb-0">Kosong</h6>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon green mb-2">
-                                                       <i> <i class="bi bi-check"></i></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Processing</h6>
-                                                    @if($process > 0)
-                                                    <h6 class="font-extrabold mb-0">{{ $process }}</h6>
-                                                    @else
-                                                    <h6 class="text-secondary mb-0">Kosong</h6>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-lg-3 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body px-4 py-4-5">
-                                            <div class="row">
-                                                <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                                    <div class="stats-icon green mb-2">
-                                                        <i> <i class="bi bi-check-all"></i></i>
-                                                     </div>
-                                                </div>
-                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                                    <h6 class="text-muted font-semibold">Complete</h6>
-                                                    @if($completed > 0)
-                                                    <h6 class="font-extrabold mb-0">{{ $completed }}</h6>
-                                                    @else
-                                                    <h6 class="text-secondary mb-0">Kosong</h6>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -148,60 +59,138 @@
     </section>
     <!-- End Hero Area -->
 
-    <!-- Start Show -->
-    <section class="domain-search">
-        <div class="container mb-3">
-            <div class="inner-cotainer">
-                <img class="sahpe" src="../assets/img/shapes/shape.png" alt="#">
-                <img class="sahpe2" src="../assets/img/shapes/shape.png" alt="#">
-                    <div class="px-5 p-5 ms-auto">
-                            @if(count($pengaduan) > 0)
-                            @foreach ($pengaduan as $aduan)
-                            <div class="card text-bg-dark">
-                                <div class="card-header text-white d-flex">
-                                  Laporan&nbsp;<span class="card-title text-danger">#{{ $aduan->id }}</span> 
-                                    <div class="d-flex justify-content-end">
-                                        <form action="{{ route('detail',$aduan->id) }}" method="get">
-                                            <input type="hidden" name="id" value="{{ $tangap->id }}">
-                                            <button type="submit" class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                            </svg>
-                                            </button>
-                                        </form>
+    <section>
+        <div class="container pt-5">
+
+            <div class="container mt-5">
+                <div class="col-12 col-9">
+                    <div class="row">
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon purple mb-2">
+                                            <i class="iconly-boldShow"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Laporan anda</h6>
+                                        @if($total > 0)
+                                        <h6 class="font-extrabold mb-0">{{ $total }}</h6>
+                                        @else
+                                        <h6 class="text-secondary mb-0">Kosong</h6>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                  <p class="card-text text-muted">Type : <span class="badge rounded-pill text-bg-info"> {{ $aduan->type }}</p> </span>
-                                  <span>Description : {{ $aduan->description }}</span>
-                                  <p class="card-text text-muted">Status : 
-                                    @if ($aduan->status == "Pending")
-                                    <h1 class=" badge text-bg-danger fw-bold">{{ $aduan->status }}</h1>
-                                    @elseif ($aduan->status == "Processing")
-                                    <h1 class="badge text-bg-warning">{{ $aduan->status }}</h1>
-                                    @elseif ($aduan->status == "Complete")
-                                    <h1 class="badge text-bg-success">{{ $aduan->status }}</h1>
-                                    @endif
-                                </div>
                             </div>
-                            <div class="card text-bg-light mt-2">
-                                <div class="card-header text-dark">
-                                  Lampiran
-                                </div>
-                                <div class="card-body">
-                                  <img src="../assets/images/upload/{{ $aduan->image }}" alt="">
-                                </div>
-                            </div>
-                            @endforeach
-
-                            @else
-                               <td colspan="8" class="text-center"> Tidak ada laporan satupun. <a href="{{ route('laporans.index') }}">Lapor</a></td>
-                            @endif
+                        </div>
                     </div>
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon red mb-2">
+                                            <i class=""><i class="bi bi-patch-exclamation-fill"></i></i></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Pending</h6>
+                                        @if($pending > 0)
+                                        <h6 class="font-extrabold mb-0">{{ $pending }}</h6>
+                                        @else
+                                        <h6 class="text-secondary mb-0">Kosong</h6>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon green mb-2">
+                                           <i> <i class="bi bi-check"></i></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Processing</h6>
+                                        @if($process > 0)
+                                        <h6 class="font-extrabold mb-0">{{ $process }}</h6>
+                                        @else
+                                        <h6 class="text-secondary mb-0">Kosong</h6>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body px-4 py-4-5">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                        <div class="stats-icon green mb-2">
+                                            <i> <i class="bi bi-check-all"></i></i>
+                                         </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                        <h6 class="text-muted font-semibold">Complete</h6>
+                                        @if($completed > 0)
+                                        <h6 class="font-extrabold mb-0">{{ $completed }}</h6>
+                                        @else
+                                        <h6 class="text-secondary mb-0">Kosong</h6>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="my-3 p-3 bg-body rounded shadow-sm p-5">
+                <h6 class="border-bottom pb-2 mb-0">Semua Laporan</h6>
+                @if(count($pengaduan) > 0)
+                @foreach ($pengaduan as $aduan)
+                <div class="d-flex text-dark pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                    <div class="d-flex justify-content-between">
+                        <strong class="text-gray-dark">{{ $aduan->type }}</strong>
+                        <a href="{{ route('detail',$aduan->id) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                        </svg></a>
+                    </div>
+                    <h6>#{{ $aduan->id }}</h6>
+                    <script>
+                    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+                    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+                    </script>
+                    @if ($aduan->status == "Pending")
+                    <h1 class=" badge text-bg-danger fw-bold">{{ $aduan->status }}</h1>
+                    @elseif ($aduan->status == "Processing")
+                    <h1 class="badge text-bg-warning">{{ $aduan->status }}</h1>
+                    @elseif ($aduan->status == "Complete")
+                    <h1 class="badge text-bg-success">{{ $aduan->status }}</h1>
+                    @endif
+                </div>
+                </div>
+                @endforeach
+                <small class="d-block text-end mt-3">
+                <a href="#">Total : {{ $total }}</a>
+                </small>
+
+                @else
+                   <td colspan="8" class="text-center"> Tidak ada laporan satupun. <a href="{{ route('laporans.index') }}">Lapor</a></td>
+                @endif
             </div>
         </div>
     </section>
-    <!-- End Show  -->
 
     {{-- Footer --}}
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mt-5">
@@ -209,7 +198,7 @@
               <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
                 <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted mx-auto">&copy; 2022 KELOMPOK 5 WAD | By : Bayu Satrio Trilaksono</span>
+            <span class="mb-3 mb-md-0 text-muted mx-auto">&copy; 2022 KELOMPOK 6 WAD | By : Bayu Satrio Trilaksono</span>
           </div>
 
           <ul class="nav col-md-4 justify-content-end list-unstyled d-flex mx-auto">

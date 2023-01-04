@@ -2,6 +2,12 @@
 
 @section('section-main')
 <div class="row">
+    @if(Session::has('delete'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Berhasil</strong> User berhasil dihapus.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <!-- customer-section start -->
     <div class="col-xl-12 col-md-12">
         <div class="card table-card">
@@ -62,7 +68,16 @@
                                   <td class="px-4 py-3 text-sm">
                                     {{ $item->created_at }}
                                   </td>
-                                  <td><a href=""><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
+                                  <td>                                        
+                                    <form action="{{ route('delete.user', $item->id)}}" method="POST">
+                                        @csrf
+                                        <button
+                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                            class="feather icon-trash-2 btn ml-3 f-16 text-danger d-block d-inline mx-0 d-flex"
+                                            aria-label="Delete">
+                                        </button>
+                                    </form>
+                                  </td>
                                 </tr>
                                 @else
                                 <tr>

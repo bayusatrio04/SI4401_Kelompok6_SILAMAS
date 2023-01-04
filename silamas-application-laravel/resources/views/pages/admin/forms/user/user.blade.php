@@ -2,6 +2,12 @@
 
 @section('section-main')
 <div class="row">
+    @if(Session::has('delete'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Berhasil</strong> User berhasil dihapus.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <label for="search">Search user</label>
     <form action="{{ route('search.user') }}" method="post">
         @csrf
