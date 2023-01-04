@@ -1,3 +1,3 @@
-## PENGKAT - Pengaduan Masyarakat
+## SILAMAS - Aplikasi Layanan Aspirasi Pengaduan Masyarakat
 
-Ini adalah Source Code Website PENGKAT - Layanan Pengaduan Masyarakat Online yang dibuat menggunakan Framework Laravel 8 dan Tailwindcss.
+Ini adalah Source Code Website SILAMAS - Aplikasi Layanan Aspirasi  Pengaduan Masyarakat Online yang dibuat menggunakan Framework Laravel 9.
