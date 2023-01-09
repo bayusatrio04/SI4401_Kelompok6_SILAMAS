@@ -2,4 +2,4 @@
 
 ##Tentang SILAMAS
 
-Silamas adalah aplikasi pengaduan masyarakat yang menampung aspirasi masyarakat secara online, yang dapat memudahkan masyarakat untuk menyampaikan pengaduannya.
+Silamas adalah aplikasi pengaduan masyarakat yang menampung aspirasi masyarakat secara online, yang dapat memudahkan masyarakat untuk menyampaikan pengaduannya. Terimakasih
